@@ -1,0 +1,244 @@
+﻿* {
+    font-size:14pt;
+    color:#eee
+}
+a {
+    color: cyan;
+}
+body {
+    background: url("bg.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+p{margin:0; text-align:left}
+
+#wrapper {
+    width: 88%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: rgba(38, 52, 74, 0.7);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.17);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.17);
+}
+
+.form_customer {
+    width: 50%!important;
+}
+#header, #bottom {
+    width: 98%;
+    display: inline-block;
+    height: auto;
+}
+#form1 {
+    height: 850px;
+}
+.titlehd {
+    display:inline-block;
+    font-size:24pt;
+    font-weight:bold;
+    margin:30px;
+}
+.row {
+    width:98%;
+    float:left;
+    padding:15px;
+}
+.label_kh {
+    padding:5px;
+    width:100px;
+    float:left;
+    text-align:left;
+    font-size:14pt;
+    font-weight:bold;
+}
+.form_customer .label_kh {
+    width: 10%!important;
+}
+#Panel1 {
+    border: 1px solid #eee;
+    border-radius:20px;
+    width: 700px;
+    height: 200px;
+}
+#Panel_Mess {
+    width: 500px;
+    height: 200px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    z-index: 100;
+    background-color: rgba(38, 52, 74, 1);
+}
+.form_panel {
+    display:inline-block;
+    background-color: rgba(38, 52, 74, 0.7);
+    width: 88%;
+    height: 650px;
+    margin: 50px auto;
+    position: relative;
+    border: 1px solid #eee;
+    border-radius: 50px 50px 0px 0px;
+}
+/*#Panel2 input{ float:left; width:70%;}*/
+#Panel2 .row{padding: 15px 100px;}
+input {
+    padding: 1px;
+    float: left;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #eee;
+    width: 75%;
+}
+.header_customer input {
+    width: 80%!important;
+}
+.rdb {
+    margin: 10px 30px;
+    float: left;
+}
+#bottom table {
+   width: auto;
+    border: 0px;
+}
+
+#bottom th, #bottom td {
+    padding: 10px;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#btnFind
+{
+    margin:10px 120px;
+}
+#btnOut {
+    float: right;
+    position: absolute;
+    padding: 10px 5px !important;
+    width: 100px !important;
+    top: -2px;
+    right: 0;
+}
+#bottom th {
+    background-color: #23516f !important;
+}
+#btn {
+    margin: 20px auto;
+    display: inline-block;
+}
+/*#content_GridView2 table{width:1653px;}*/
+#GridView2 table td {
+    width: 50px !important;
+    /*background-color: #23516f;*/
+    margin-right: 5px;
+}
+#GridView2 table td a {
+    color:coral;
+}
+.button {
+    width:120px!important;
+    padding: 7px 35px !important;
+    margin: 10px;
+    background-color: #23516f;
+    border: 0px;
+    border-radius: 5px;
+}
+#bottom {
+    padding: 20px;
+    padding-top: 0px;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year option {
+    background-color: #444;
+}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    background-color: #444;
+}
+
+
+#body_login {
+    background: url("../img/banner.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#form_login {
+    width: 400px;
+    height: auto;
+    text-align: center;
+    margin: 100px auto;
+    padding: 20px;
+    background: rgba(15, 15, 15, 0.81);
+}
+
+#logo {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+}
+
+#btn_login {
+    padding: 15px 20px;
+    margin: 25px;
+    border: 0px;
+    border-radius: 5px;
+    font-size: 14pt;
+    background-color: #23516f;
+    color: #fff;
+    float:none!important;
+    width:200px!important;
+}
+
+#btn_login:hover {
+    cursor: pointer;
+    background-color: #15596f;
+}
+
+#user, #password {
+    padding: 10px;
+    font-size: 14pt;
+    padding-left: 32px;
+    width: 85%;
+    margin-top: 30px;
+    border: 0px;
+    border-bottom: 1px solid #23516f;
+    color: #fff;
+}
+
+#user {
+    background: url("../img/m.png") no-repeat 0px 7px;
+}
+
+#password {
+    background: url("../img/l.png") no-repeat 0px 7px;
+}
+
+#DropDownList1 {
+    float:right;
+    color:#111;
+    margin: 10px 0;
+    width: 50px;
+}
+#DropDownList1 option {
+    color: #111 !important;
+}
+#btnOpenUpdate, #btnDelete {
+    display:block;
+}
+#btnReturn {
+    margin: 10px 80px;
+}
+.button:hover {
+    cursor: pointer;
+    background-color: #15596f;
+}
