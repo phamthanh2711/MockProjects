@@ -27,7 +27,7 @@
 <body>
     <form id="form1" runat="server">
         <div id="wrapper">
-        <marquee>ここにお客様の情報を挿入してください</marquee>
+        <marquee>Welcome to the form information of customer</marquee>
         <p class="titlehd">Form information of customer</p>
         <asp:Panel ID="Panel2" class="form_panel" runat="server">
                         <asp:Label class="titlehd" id="title_Popup" runat="server"></asp:Label>

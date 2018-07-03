@@ -24,6 +24,19 @@ namespace WebApplication4
             GridView1.SelectedRowStyle.BackColor = Color.Transparent;
         }
 
+        public void Load_Data()
+        {
+            try
+            {
+                GridView1.DataSource = customer.Find_Customer(txt_ID.Text, txt_Name.Text);
+                GridView1.DataBind();
+            }
+            catch(SqlException)
+            {
+                Label1.Text = "Connect to Database fail";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }          
+        }
 
         //load page 
         protected void Page_Load(object sender, EventArgs e)
@@ -31,14 +44,12 @@ namespace WebApplication4
             if (Session["login"] == null) Response.Redirect("Login.aspx");
             if (!IsPostBack)
             {
-                DataTable dt = new DataTable();
-                GridView1.DataSource = customer.Find_Customer(txt_ID.Text, txt_Name.Text);
-                GridView1.DataBind();
+                Load_Data();
             }
         }
 
         // Auto create ID of customer 
-        public void get_ID()
+        public void Get_ID()
         {
             try
             {    
@@ -52,10 +63,10 @@ namespace WebApplication4
             }
             catch (Exception ex)
             {
-                Response.Write(ex);
+                throw ex;
             }
            
-        }
+        } 
 
         //Find customer by name or ID input
         protected void btnFind_Click(object sender, EventArgs e)
@@ -65,39 +76,48 @@ namespace WebApplication4
                 GridView1.DataSource = customer.Find_Customer(txt_ID.Text.Trim(), txt_Name.Text.Trim());
                 GridView1.DataBind();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Response.Write(ex);
+                Label1.Text = "Connect to Database fail";
+                Panel_Mess.Attributes.Add("style", "display: block");
             }
         }
 
         public override void VerifyRenderingInServerForm(Control control)
         {
-
+            //
         }
 
         // refresh table to original default
         protected void btnReset_Click(object sender, EventArgs e)
         {
             Clear_TextBox();
-            GridView1.DataSource = customer.Select_Customer("");
-            GridView1.DataBind();
+            Load_Data();
         }
 
         //Open dropdownlist to select count row will display in gridview
         protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
         {
             GridView1.PageSize = Int32.Parse(DropDownList1.SelectedItem.ToString());
-            GridView1.DataSource = customer.Find_Customer(txt_ID.Text.Trim(), txt_Name.Text.Trim());
-            GridView1.DataBind();
+            Load_Data();
         }
 
         //Open the detail page to insert a customer into table
         protected void btnOpenInsert_Click(object sender, EventArgs e)
         {
-            Session["status"] = "insert";
-            get_ID();
-            Response.Redirect("Form_Detail.aspx");
+            try
+            {
+                Session["status"] = "insert";
+                Get_ID();
+                if (Session["id"] != null)
+                    Response.Redirect("Form_Detail.aspx");
+            }
+            catch(SqlException)
+            {
+                Label1.Text = "Connect to Database fail";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }
+            
         }
 
         //remove customers from table
@@ -122,13 +142,14 @@ namespace WebApplication4
                 }
                 else
                 {
-                    Label1.Text = "Delete fail";
+                    Label1.Text = "Please choose textbox to delete";
                     Panel_Mess.Attributes.Add("style", "display: block");
                 }
             }
-            catch (Exception ex)
+            catch (SqlException)
             {
-                Response.Write(ex);
+                Label1.Text = "Connect to Database fail";
+                Panel_Mess.Attributes.Add("style", "display: block");
             }
         }
 
@@ -143,31 +164,24 @@ namespace WebApplication4
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;
-            GridView1.DataSource = customer.Find_Customer(txt_ID.Text.Trim(), txt_Name.Text.Trim());
-            GridView1.DataBind();
+            Load_Data();
         }
 
 
         //event when click the cell in gridview
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                GridView1.SelectedRowStyle.BackColor = Color.DarkCyan;
-                GridViewRow gr = GridView1.SelectedRow;
-                Session["id"] = gr.Cells[0].Text.Trim();
-                Session["status"] = "update";
-                Response.Redirect("Form_Detail.aspx");
-            }
-            catch (Exception ex)
-            {
-                Response.Write(ex);
-            }
+            GridView1.SelectedRowStyle.BackColor = Color.DarkCyan;
+            GridViewRow gr = GridView1.SelectedRow;
+            Session["id"] = gr.Cells[0].Text.Trim();
+            Session["status"] = "update";
+            Response.Redirect("Form_Detail.aspx");
         }
 
         protected void btnReturn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Form_Main.aspx");
+            Panel_Mess.Attributes.Add("style", "display: hidden");
+            Load_Data();         
         }
     }
 }

@@ -18,51 +18,57 @@ namespace WebApplication4
         public String name="", birth="", gender="", email="", phone="", address="";
 
         protected void Page_Load(object sender, EventArgs e)
-        {           
-            if (Session["status"] == null)
-            {
-                Response.Redirect("Form_Main.aspx");
-            }
-            else
-            {
-                id = Session["id"].ToString();
-                txt_ID.Text = id;
-            }
-            if (!IsPostBack)
-            {
-                if (Session["status"].ToString() == "update")
+        {
+            try {
+                if (Session["status"] == null)
                 {
-                    Customer customer = new Customer();
-                    DataTable dt = new DataTable();
-                    dt = customer.Select_Customer(id);
-                    if(dt!=null)
-                    { 
-                        txt_ID.Text = dt.Rows[0]["id"].ToString();
-                        txt_Name.Text = dt.Rows[0]["name"].ToString();
-                        txt_Birth.Text = dt.Rows[0]["birth"].ToString();
-                        if (String.Compare(dt.Rows[0]["gender"].ToString(), HttpUtility.HtmlDecode("Male")) == 0)
+                    Response.Redirect("Form_Main.aspx");
+                }
+                else
+                {
+                    id = Session["id"].ToString();
+                    txt_ID.Text = id;
+                }
+                if (!IsPostBack)
+                {
+                    if (Session["status"].ToString() == "update")
+                    {
+                        Customer customer = new Customer();
+                        DataTable dt = new DataTable();
+                        dt = customer.Select_Customer(id);
+                        if (dt != null)
                         {
-                            rdb_Male.Checked = true; rdb_Female.Checked = false;
+                            txt_ID.Text = dt.Rows[0]["id"].ToString();
+                            txt_Name.Text = dt.Rows[0]["name"].ToString();
+                            txt_Birth.Text = dt.Rows[0]["birth"].ToString();
+                            if (String.Compare(dt.Rows[0]["gender"].ToString(), HttpUtility.HtmlDecode("Male")) == 0)
+                            {
+                                rdb_Male.Checked = true; rdb_Female.Checked = false;
+                            }
+                            else
+                            {
+                                rdb_Female.Checked = true; rdb_Male.Checked = false;
+                            }
+
+                            txt_Phone.Text = dt.Rows[0]["phone"].ToString();
+                            txt_Email.Text = dt.Rows[0]["email"].ToString();
+                            txt_Address.Text = dt.Rows[0]["address"].ToString();
+
+                            btnInsert.Text = "Update";
                         }
                         else
                         {
-                            rdb_Female.Checked = true; rdb_Male.Checked = false;
+                            Label1.Text = "Cannot select data of customer";
+                            Panel_Mess.Attributes.Add("style", "display: block");
                         }
-
-                        txt_Phone.Text = dt.Rows[0]["phone"].ToString();
-                        txt_Email.Text = dt.Rows[0]["email"].ToString();
-                        txt_Address.Text = dt.Rows[0]["address"].ToString();
-
-                        btnInsert.Text = "Update";
-                    }
-                    else
-                    {
-                        Label1.Text = "Cannot select data of customer";
-                        Panel_Mess.Attributes.Add("style", "display: block");
                     }
                 }
+            } catch(SqlException)
+            {
+                Label1.Text = "Connect to Database fail";
+                Panel_Mess.Attributes.Add("style", "display: block");
             }
-
+            
         }
 
         //insert or update customer into table
@@ -111,11 +117,10 @@ namespace WebApplication4
                         Panel_Mess.Attributes.Add("style", "display: block");
                     }
                 }
-
             }
             catch (Exception)
             {
-                Label1.Text = Session["exception"].ToString();
+                Label1.Text = "Connect to Database fail";
                 Panel_Mess.Attributes.Add("style", "display: block");
             }
         }

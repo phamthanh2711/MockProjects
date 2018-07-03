@@ -38,11 +38,13 @@ namespace WebApplication4
             try
             {
                 String pass = EncodePassword(password.Text);
-                Customer customer = new Customer();
-                com.CommandText = "select_Account";
-                com.Parameters.AddWithValue("@name", user.Text);
-                com.Parameters.AddWithValue("@pass", pass);
-                if (customer.Get_Data(com).Tables[0].Rows.Count > 0)
+                Connect_SQL sql = new Connect_SQL();
+                var param = new List<Tuple<string, string>>();
+                param.Add(Tuple.Create("@name", user.Text));
+                param.Add(Tuple.Create("@pass", pass));
+                String query = "select_Account";
+
+                if (sql.Get_Data(query,param).Rows.Count > 0)
                 {
                     Session["login"] = 1;
                     Response.Redirect("Form_Main.aspx");
@@ -53,9 +55,9 @@ namespace WebApplication4
                     lblCheck.Text = "Incorrect username or password";
                 }
             }
-            catch (Exception)
+            catch (NullReferenceException)
             {
-                lblCheck.Text = Session["exception"].ToString();
+                lblCheck.Text = "Connect to Database fail";
             }
         }
     }

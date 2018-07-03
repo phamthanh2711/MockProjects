@@ -32,7 +32,7 @@
         <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click"/>
         <div id="wrapper">
         
-        <marquee>ここにお客様の情報を挿入してください</marquee>
+        <marquee>Welcome to the form information of customer</marquee>
         <p class="titlehd">Form information of customer</p>
         
             
