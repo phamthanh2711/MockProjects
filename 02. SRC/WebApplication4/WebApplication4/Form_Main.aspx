@@ -11,20 +11,22 @@
     <script src="Assets/jquery/jquery-ui.js"></script>
     <script src="Assets/jquery/jquery-ui.min.js"></script>
     <link href="Assets/css/style.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript"> 
-  
-        function clickButton(e, buttonid)
-        {   
-          var evt = e ? e : window.event;  
-          var bt = document.getElementById(buttonid);  
-  
-          if (bt){
-              if (evt.keyCode == 13){   
-                    bt.click();   
-                    return false;   
-              }   
-          }   
-        }  
+    <script>
+        $(document).ready(function () {
+            //Loop through each checkbox in gridview
+            //Change the GridView id here
+            $("#<%=GridView1.ClientID %> input:checkbox").each(function () {
+                this.onclick = function () {
+                    //Check if the checkbox is selected or not
+                    if (this.checked)
+                        //If checked then change the backgroundcolor
+                        this.parentNode.parentNode.parentNode.style.backgroundColor = '#2255FF';
+                    else
+                        //If not then change it back to none color
+                        this.parentNode.parentNode.parentNode.style.backgroundColor = 'transparent';
+                }
+            })
+        });
     </script>
 </head>
 <body>
@@ -133,7 +135,7 @@
                             </asp:CommandField>
                             <asp:TemplateField>                          
                                 <ItemTemplate>                            
-                                    <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack="True" Checked="false"/>                                   
+                                    <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack="false" Checked="false"/>                                   
                                 </ItemTemplate>
                                 <ControlStyle Width="50px" />
                                 <FooterStyle Width="50px" />

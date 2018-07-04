@@ -110,7 +110,10 @@ namespace WebApplication4
                 Session["status"] = "insert";
                 Get_ID();
                 if (Session["id"] != null)
+                {
                     Response.Redirect("Form_Detail.aspx");
+                }
+                    
             }
             catch(SqlException)
             {
@@ -120,7 +123,7 @@ namespace WebApplication4
             
         }
 
-        //remove customers from table
+        //Remove customers from table
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             try
