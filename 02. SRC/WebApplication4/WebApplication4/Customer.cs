@@ -48,7 +48,8 @@ namespace WebApplication4
             email = Convert.ToString(dt.Rows[current_row]["email"]);
             address = Convert.ToString(dt.Rows[current_row]["address"]);
         }
-
+        
+        //Select customer in table by id
         public DataTable Select_Customer(String id)
         {
             try
@@ -71,7 +72,8 @@ namespace WebApplication4
                 throw ex;
             }   
         }
-
+        
+        //get count of row in table
         public int Get_Count_Row()
         {
             try
@@ -84,7 +86,8 @@ namespace WebApplication4
                 throw ex;
             }
         }
-
+        
+        //insert or update customer into table
         public Boolean Add_Customer(String query, string id, String name, String birth, String gender, String phone, String email, String address)
         {
             try
@@ -112,7 +115,8 @@ namespace WebApplication4
                 throw ex;
             }
         }
-
+        
+        //delete customer in table
         public Boolean Delete_Customer(String query, string id)
         {
             try
@@ -134,7 +138,8 @@ namespace WebApplication4
                 throw ex;
             }       
         }
-
+        
+        //find customer in table
         public DataTable Find_Customer(string id, String name)
         {
             try
