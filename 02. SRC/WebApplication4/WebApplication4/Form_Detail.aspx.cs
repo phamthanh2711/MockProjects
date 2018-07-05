@@ -15,12 +15,13 @@ namespace WebApplication4
     {
 
         public String id = "";
-        public String name="", birth="", gender="", email="", phone="", address="";
+        public String name = "", birth = "", gender = "", email = "", phone = "", address = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try {
-                if (Session["status"] == null)
+            try
+            {
+                if (Session["status"] == null || Session["id"]==null)
                 {
                     Response.Redirect("Form_Main.aspx");
                 }
@@ -28,6 +29,7 @@ namespace WebApplication4
                 {
                     id = Session["id"].ToString();
                     txt_ID.Text = id;
+                    txt_Birth.Attributes.Add("readonly", "true");
                 }
                 if (!IsPostBack)
                 {
@@ -63,12 +65,12 @@ namespace WebApplication4
                         }
                     }
                 }
-            } catch(SqlException)
+            }
+            catch (SqlException)
             {
                 Label1.Text = "Connect to Database fail";
                 Panel_Mess.Attributes.Add("style", "display: block");
             }
-            
         }
 
         //insert or update customer into table
@@ -76,15 +78,19 @@ namespace WebApplication4
         {
             try
             {
-                name = txt_Name.Text;
-                birth = txt_Birth.Text;
+                name = txt_Name.Text.Trim();
+                birth = txt_Birth.Text.Trim();
                 if (rdb_Male.Checked == true)
+                {
                     gender = "Male";
+                }
                 else
+                {
                     gender = "Female";
-                phone = txt_Phone.Text;
-                email = txt_Email.Text;
-                address = txt_Address.Text;
+                }               
+                phone = txt_Phone.Text.Trim();
+                email = txt_Email.Text.Trim();
+                address = txt_Address.Text.Trim();
                 Customer customer = new Customer();
                 if (Session["status"].ToString() == "insert")
                 {
@@ -118,7 +124,7 @@ namespace WebApplication4
                     }
                 }
             }
-            catch (Exception)
+            catch (SqlException)
             {
                 Label1.Text = "Connect to Database fail";
                 Panel_Mess.Attributes.Add("style", "display: block");
@@ -128,12 +134,28 @@ namespace WebApplication4
         //when click will be returned to main form
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Form_Main.aspx");
+            try
+            {
+                Response.Redirect("Form_Main.aspx");
+            }
+            catch (HttpException)
+            {
+                Label1.Text = "Cannot return to form main";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }
         }
 
         protected void btnReturn_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Form_Main.aspx");
+            try
+            {
+                Response.Redirect("Form_Main.aspx");
+            }
+            catch (HttpException)
+            {
+                Label1.Text = "Cannot return to form main";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }
         }
     }
 }

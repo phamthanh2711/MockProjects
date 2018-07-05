@@ -18,7 +18,7 @@
                     dateFormat:'dd/mm/yy',
                     changeMonth: true,
                     changeYear: true,
-                    yearRange: '1950:2020'
+                    yearRange: 'c-100:c'
                 });
         });
     </script>
@@ -46,7 +46,7 @@
                         <div class="row">
                             <p>
                                 <label class="label_kh">Birth (*)</label>
-                                <asp:TextBox runat="server" ID="txt_Birth" ReadOnly="False" ></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txt_Birth"></asp:TextBox>
                             </p>
                             <p>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please insert" ControlToValidate="txt_Birth" ForeColor="#FF9900" style="text-align: left"></asp:RequiredFieldValidator>

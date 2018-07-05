@@ -55,17 +55,16 @@ namespace WebApplication4
             {    
                 if(customer.Get_Count_Row()!=-1)
                 { 
-                int stt = 0;
-                stt = customer.Get_Count_Row();
-                String ma = Constant.head_ID + (stt+1).ToString("000000");
-                Session["id"] = ma;
+                    int stt = 0;
+                    stt = customer.Get_Count_Row();
+                    String ma = Constant.head_ID + (stt+1).ToString("000000");
+                    Session["id"] = ma;
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-           
+            }        
         } 
 
         //Find customer by name or ID input
@@ -85,7 +84,7 @@ namespace WebApplication4
 
         public override void VerifyRenderingInServerForm(Control control)
         {
-            //
+            //Verify Rendering In Server Form
         }
 
         // refresh table to original default
@@ -120,7 +119,11 @@ namespace WebApplication4
                 Label1.Text = "Connect to Database fail";
                 Panel_Mess.Attributes.Add("style", "display: block");
             }
-            
+            catch (HttpException)
+            {
+                Label1.Text = "Cannot open form detail";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }
         }
 
         //Remove customers from table
@@ -159,26 +162,44 @@ namespace WebApplication4
         // button log out the page
         protected void btnOut_Click(object sender, EventArgs e)
         {
-            Session["login"] = null;
-            Response.Redirect("Login.aspx");
+            try {
+                Session["login"] = null;
+                Response.Redirect("Login.aspx");
+            } catch(HttpException)
+            {
+                Label1.Text = "Button log out error";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }  
         }
 
         // change index page of gridview
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            GridView1.PageIndex = e.NewPageIndex;
-            Load_Data();
+            try {
+                GridView1.PageIndex = e.NewPageIndex;
+                Load_Data();
+            } catch(ArgumentOutOfRangeException)
+            {
+                Label1.Text = "property is set to a value less than 0";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }   
         }
 
 
         //event when click the cell in gridview
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GridView1.SelectedRowStyle.BackColor = Color.DarkCyan;
-            GridViewRow gr = GridView1.SelectedRow;
-            Session["id"] = gr.Cells[0].Text.Trim();
-            Session["status"] = "update";
-            Response.Redirect("Form_Detail.aspx");
+            try {
+                GridView1.SelectedRowStyle.BackColor = Color.DarkCyan;
+                GridViewRow gr = GridView1.SelectedRow;
+                Session["id"] = gr.Cells[0].Text.Trim();
+                Session["status"] = "update";
+                Response.Redirect("Form_Detail.aspx");
+            } catch(HttpException)
+            {
+                Label1.Text = "Cannot open form detail";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }           
         }
 
         protected void btnReturn_Click(object sender, EventArgs e)
