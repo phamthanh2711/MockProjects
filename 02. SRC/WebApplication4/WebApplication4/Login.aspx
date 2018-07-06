@@ -6,6 +6,7 @@
 <head runat="server">
     <title></title>
     <link href="Assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
 </head>
 <body id="body_login">
     <form id="form_login" runat="server">
@@ -13,9 +14,9 @@
         <div id="logo"><img src="Assets/img/logo.png" width="100%"></div>
         <div style="width:100%">
             <p><asp:Textbox id="user" runat="server" name="user" placeholder="Insert your user name"></asp:TextBox></p>
-            <p><asp:RequiredFieldValidator runat="server" id="reqName" controltovalidate="user" errormessage="Please insert your user name" ForeColor="#FF9900" style="text-align: left" /></p>
+            <p><asp:Label id="Label1" runat="server" style="display:block;color: #FF9900; text-align:center"></asp:Label></p>
             <p><asp:Textbox id="password" runat="server" name="password" placeholder="Insert your password" TextMode="Password"></asp:TextBox></p>
-            <p><asp:RequiredFieldValidator runat="server" id="RequiredFieldValidator1" controltovalidate="password" errormessage="Please insert your password" ForeColor="#FF9900" /></p>
+            <p><asp:Label id="Label2" runat="server" style="display:block;color: #FF9900; text-align:center"></asp:Label></p>
             <p><asp:Label id="lblCheck" runat="server" style="display:block;color: #FF9900; text-align:center"></asp:Label></p>
             
         </div>

@@ -10,6 +10,7 @@ using System.Configuration;
 using System.Drawing;
 using System.IO;
 
+
 namespace WebApplication4
 {
     public partial class Form_Main : System.Web.UI.Page
@@ -28,6 +29,8 @@ namespace WebApplication4
         {
             try
             {
+                if(Session["index"]!=null)
+                GridView1.PageIndex = Int32.Parse(Session["index"].ToString());
                 GridView1.DataSource = customer.Find_Customer(txt_ID.Text, txt_Name.Text);
                 GridView1.DataBind();
             }
@@ -177,6 +180,7 @@ namespace WebApplication4
         {
             try {
                 GridView1.PageIndex = e.NewPageIndex;
+                Session["index"] = GridView1.PageIndex;
                 Load_Data();
             } catch(ArgumentOutOfRangeException)
             {
@@ -206,6 +210,67 @@ namespace WebApplication4
         {
             Panel_Mess.Attributes.Add("style", "display: hidden");
             Load_Data();         
+        }
+
+
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Pager)
+            {
+                int i = 0;
+                foreach (Control ctl in e.Row.Cells[0].Controls[0].Controls[0].Controls)
+                {
+                    i++;
+                    if (ctl.Controls[0].GetType().ToString() == "System.Web.UI.WebControls.DataControlPagerLinkButton")
+                    {
+                        LinkButton lnk = (LinkButton)ctl.Controls[0];
+                        if (lnk.Text == "...")
+                        {
+                            if (i < 3)
+                            {
+                                lnk.Text = "<<";
+                            }
+                            else
+                            {
+                                lnk.Text = ">>";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //Export data of table to file excel
+        protected void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.ClearContent();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", string.Format("attachment; filename={0}", ""+DateTime.Today.ToString("yyyyMMdd").Trim()+".xls"));
+                Response.ContentType = "application/ms-excel";
+                Response.ContentEncoding = System.Text.Encoding.Unicode;
+                Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+
+                StringWriter stringWriter = new StringWriter();
+
+                HtmlTextWriter textWriter = new HtmlTextWriter(stringWriter);
+
+                GridView1.HeaderRow.Style.Add("background-color", "#111");
+                GridView1.Columns[7].Visible = false;
+                GridView1.Columns[8].Visible = false;
+                GridView1.AllowPaging = false;
+                GridView1.DataSource= customer.Find_Customer(txt_ID.Text, txt_Name.Text);
+                GridView1.DataBind();
+
+                GridView1.RenderControl(textWriter);
+                Response.Write(stringWriter.ToString());
+                Response.End();
+            }
+            catch(Exception) {
+                Label1.Text = "Cannot export file excel";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }  
         }
     }
 }

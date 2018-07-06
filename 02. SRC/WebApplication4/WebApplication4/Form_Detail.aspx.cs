@@ -157,5 +157,19 @@ namespace WebApplication4
                 Panel_Mess.Attributes.Add("style", "display: block");
             }
         }
+
+        protected void btnOut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["login"] = null;
+                Response.Redirect("Login.aspx");
+            }
+            catch (HttpException)
+            {
+                Label1.Text = "Button log out error";
+                Panel_Mess.Attributes.Add("style", "display: block");
+            }
+        }
     }
 }

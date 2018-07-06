@@ -18,6 +18,7 @@
                     dateFormat:'dd/mm/yy',
                     changeMonth: true,
                     changeYear: true,
+                    maxDate:'0',
                     yearRange: 'c-100:c'
                 });
         });
@@ -26,8 +27,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <div style="height: 50px; padding:5px; background-color: #23516f; border-bottom:1px solid #eee;">
+            <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click"/>
+            <marquee style="margin: 14px;">Welcome to the form information of customer</marquee>
+        </div>
         <div id="wrapper">
-        <marquee>Welcome to the form information of customer</marquee>
         <p class="titlehd">Form information of customer</p>
         <asp:Panel ID="Panel2" class="form_panel" runat="server">
                         <asp:Label class="titlehd" id="title_Popup" runat="server"></asp:Label>
@@ -86,7 +90,7 @@
                         </div> 
                         <div class="row" style="padding-left:200px">
                             <asp:Button ID="btnInsert" runat="server" class="button" Text="Insert" OnClick="btnInsert_Click"/>
-                            <asp:Button ID="btnCancel" runat="server" class="button" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="false"/>
+                            <asp:Button ID="btnCancel" runat="server" class="button" Text="Return" OnClick="btnCancel_Click" CausesValidation="false"/>
                         </div>                   
                         
                   

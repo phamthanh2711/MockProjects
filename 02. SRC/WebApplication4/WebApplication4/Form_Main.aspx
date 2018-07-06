@@ -5,6 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <meta name=ProgId content=Excel.Sheet/>
+    <meta name=Generator content="Microsoft Excel 11"/>
     <link rel="stylesheet" href="Assets/jquery/jquery-ui.css" />
     <link rel="stylesheet" href="Assets/jquery/jquery-ui.min.css" />
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
@@ -31,10 +33,11 @@
 </head>
 <body>
     <form id="form1" runat="server" defaultbutton="btnFind">
-        <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click"/>
+        <div style="height: 50px; padding:5px; background-color: #23516f; border-bottom:1px solid #eee;">
+            <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click"/>
+            <marquee style="margin: 14px;">Welcome to the form information of customer</marquee>
+        </div>
         <div id="wrapper">
-        
-        <marquee>Welcome to the form information of customer</marquee>
         <p class="titlehd">Form information of customer</p>
         
             
@@ -60,7 +63,8 @@
                     <asp:Button ID="btnOpenInsert" runat="server" class="button" Text="Insert" OnClick="btnOpenInsert_Click"/>
          
                     <asp:Button ID="btnDelete" runat="server" class="button" Text="Delete" OnClick="btnDelete_Click" />
-                    <asp:Button ID="btnReset" runat="server" class="button" Text="Reset" OnClick="btnReset_Click" />             
+                    <asp:Button ID="btnReset" runat="server" class="button" Text="Reset" OnClick="btnReset_Click" />
+                    <asp:Button ID="btnExport" runat="server" class="button" Text="Export" OnClick="btnExport_Click" />             
                 </div>
                  
                 <center>
@@ -73,7 +77,7 @@
                  </center>
 
                 <div style="padding:15px;">
-                <label style="float: right; padding: 10px;">Page size</label>
+                <label style="float: right; padding: 10px;">Count Row</label>
                 <asp:DropDownList ID="DropDownList1" AutoPostBack="true" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1" >
                     <asp:ListItem Text="20"></asp:ListItem>
                     <asp:ListItem Text="40"></asp:ListItem>
@@ -84,7 +88,7 @@
                 <div id="bottom">
                     
                     
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" PageSize="20">
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" PageSize="20" OnRowCreated="GridView1_RowCreated">
                         <Columns>
                             <asp:BoundField HeaderText="ID" DataField="id">
                             <ControlStyle Width="100px" />
@@ -144,7 +148,7 @@
                                 
                             </asp:TemplateField>
                         </Columns>
-                        <PagerSettings Mode="NextPreviousFirstLast" FirstPageText="First" LastPageText="End" NextPageText="Next" PageButtonCount="3" PreviousPageText="Previous" />
+                        <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="End" NextPageText="Next" PageButtonCount="3" PreviousPageText="Previous" />
                         <PagerStyle BorderWidth="0px" HorizontalAlign="Center" />
                         <SelectedRowStyle BackColor="#6699FF" />
                     </asp:GridView>

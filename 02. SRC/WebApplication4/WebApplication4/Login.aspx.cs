@@ -17,7 +17,7 @@ namespace WebApplication4
         SqlCommand com = new SqlCommand();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["login"] != null) Response.Redirect("Form_Main.aspx");
+            //if (Session["login"] != null) Response.Redirect("Form_Main.aspx");
         }
 
         protected string EncodePassword(string input)
@@ -37,23 +37,38 @@ namespace WebApplication4
         {
             try
             {
-                String pass = EncodePassword(password.Text);
-                Connect_SQL sql = new Connect_SQL();
-                var param = new List<Tuple<string, string>>();
-                param.Add(Tuple.Create("@name", user.Text));
-                param.Add(Tuple.Create("@pass", pass));
-                String query = "select_Account";
+                lblCheck.Text = "";
+                Label1.Text = "";
+                Label2.Text = "";
+                if (user.Text == "")
+                {
+                    Label1.Text = "Please insert user name";
+                }
+                if (password.Text == "")
+                {
+                    Label2.Text = "Please insert password";
+                }
+                if (user.Text!=""&& password.Text!="")
+                {
+                    String pass = EncodePassword(password.Text);
+                    Connect_SQL sql = new Connect_SQL();
+                    var param = new List<Tuple<string, string>>();
+                    param.Add(Tuple.Create("@name", user.Text));
+                    param.Add(Tuple.Create("@pass", pass));
+                    String query = "select_Account";
 
-                if (sql.Get_Data(query,param).Rows.Count > 0)
-                {
-                    Session["login"] = 1;
-                    Response.Redirect("Form_Main.aspx");
+                    if (sql.Get_Data(query, param).Rows.Count > 0)
+                    {
+                        Session["login"] = 1;
+                        Response.Redirect("Form_Main.aspx");
+                    }
+                    else
+                    {
+                        Session["login"] = null;
+                        lblCheck.Text = "Incorrect username or password";
+                    }
                 }
-                else
-                {
-                    Session["login"] = null;
-                    lblCheck.Text = "Incorrect username or password";
-                }
+                
             }
             catch (NullReferenceException)
             {
