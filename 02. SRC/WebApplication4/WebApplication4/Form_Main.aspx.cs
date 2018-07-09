@@ -29,8 +29,15 @@ namespace WebApplication4
         {
             try
             {
-                if(Session["index"]!=null)
-                GridView1.PageIndex = Int32.Parse(Session["index"].ToString());
+                if (Session["index"] != null && Session["status"]!=null && Session["status"].ToString() == "update")
+                {
+                    GridView1.PageIndex = Int32.Parse(Session["index"].ToString());
+                }
+                if (Session["count_row"] != null)
+                {
+                    DropDownList1.SelectedValue = Session["count_row"].ToString();
+                    GridView1.PageSize = Int32.Parse(Session["count_row"].ToString());
+                }
                 GridView1.DataSource = customer.Find_Customer(txt_ID.Text, txt_Name.Text);
                 GridView1.DataBind();
             }
@@ -101,6 +108,7 @@ namespace WebApplication4
         protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
         {
             GridView1.PageSize = Int32.Parse(DropDownList1.SelectedItem.ToString());
+            Session["count_row"] = GridView1.PageSize;
             Load_Data();
         }
 

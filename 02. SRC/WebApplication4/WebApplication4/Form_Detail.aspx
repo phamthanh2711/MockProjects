@@ -44,7 +44,12 @@
                             <p><label class="label_kh" >Name (*)</label>
                             <asp:TextBox runat="server" ID="txt_Name"></asp:TextBox></p>
                             <p>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please insert" ControlToValidate="txt_Name" ForeColor="#FF9900" style="text-align: left"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please insert name of customer" ControlToValidate="txt_Name" ForeColor="#FF9900" style="text-align: left; position:absolute; top: 50px;left: 210px;"></asp:RequiredFieldValidator>
+                            </p>
+                            <p>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Name field cannot fill number or special symbol" ControlToValidate="txt_Name"
+                                Display="Dynamic" ForeColor="#FF9900" SetFocusOnError="True"
+                                ValidationExpression="^[a-zA-Z\s]+$" style="text-align: left; position:absolute; top: 50px;left: 210px;"></asp:RegularExpressionValidator>
                             </p>
                         </div>
                         <div class="row">
@@ -53,7 +58,7 @@
                                 <asp:TextBox runat="server" ID="txt_Birth"></asp:TextBox>
                             </p>
                             <p>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please insert" ControlToValidate="txt_Birth" ForeColor="#FF9900" style="text-align: left"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please insert date of birth" ControlToValidate="txt_Birth" ForeColor="#FF9900" style="text-align: left; position:absolute; top: 50px;left: 210px;"></asp:RequiredFieldValidator>
                             </p>
                         </div>
 
@@ -68,9 +73,9 @@
                                 <asp:TextBox runat="server" ID="txt_Phone"></asp:TextBox> 
                             </p> 
                             <p>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Error format of phone" ControlToValidate="txt_Phone"
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Phone number cannot fill text, white space or specical symbol" ControlToValidate="txt_Phone"
                                 Display="Dynamic" ForeColor="#FF9900" SetFocusOnError="True"
-                                ValidationExpression="^[\d\s\+\(\)\.\,]+$"></asp:RegularExpressionValidator>
+                                ValidationExpression="^[\d\+\(\)\.\,]+$" style="text-align: left; position:absolute; top: 50px;left: 210px;"></asp:RegularExpressionValidator>
                             </p>
                         </div>
                         <div class="row">
@@ -81,7 +86,7 @@
                             <p>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Error format of email" ControlToValidate="txt_Email"
                                 Display="Dynamic" ForeColor="#FF9900" SetFocusOnError="True"
-                                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                                ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" style="text-align: left; position:absolute; top: 50px;left: 210px;"></asp:RegularExpressionValidator>
                             </p>
                         </div>
                         <div class="row">

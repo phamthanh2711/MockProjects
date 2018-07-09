@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Drawing;
+using System.Text;
 
 namespace WebApplication4
 {
@@ -73,12 +74,42 @@ namespace WebApplication4
             }
         }
 
-        //insert or update customer into table
+        // Delete white space in string
+        protected String Delete_Space(String s)
+        {
+            if (String.IsNullOrEmpty(s))
+                return s;
+
+            string result = "";
+
+            // Get list of word in string 
+
+            string[] words = s.Split(' ');
+
+            foreach (string word in words)
+            {
+                // If words that have whitespace, remove whitespace
+                if (word.Trim() != "")
+                {
+                    if (word.Length > 1)
+                    {
+                        result += word.Substring(0, 1).ToUpper() + word.Substring(1).ToLower() + " ";
+                    }
+                    else
+                    {
+                        result += word.ToUpper() + " ";
+                    }
+                }
+            }
+            return result.Trim();
+        }
+
+        // Insert or update customer into table
         protected void btnInsert_Click(object sender, EventArgs e)
         {
             try
             {
-                name = txt_Name.Text.Trim();
+                name = Delete_Space(txt_Name.Text.Trim());
                 birth = txt_Birth.Text.Trim();
                 if (rdb_Male.Checked == true)
                 {
@@ -123,6 +154,7 @@ namespace WebApplication4
                         Panel_Mess.Attributes.Add("style", "display: block");
                     }
                 }
+                Session["id"] = null;
             }
             catch (SqlException)
             {
@@ -131,7 +163,7 @@ namespace WebApplication4
             }
         }
 
-        //when click will be returned to main form
+        // When click will be returned to main form
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             try
