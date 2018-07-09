@@ -1,11 +1,14 @@
 ﻿* {
-    font-size:14pt;
-    color:#eee
+   font-size:14pt;
+   color:#eee
 }
 a {
-    color: cyan;
+   color: cyan;
+   text-decoration:none;
 }
 body {
+    padding:0;
+    margin:0;
     background: url("bg.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -16,7 +19,7 @@ body {
 p{margin:0; text-align:left}
 
 #wrapper {
-    width: 88%;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     background-color: rgba(38, 52, 74, 0.7);
@@ -81,7 +84,7 @@ p{margin:0; text-align:left}
     display:inline-block;
     background-color: rgba(38, 52, 74, 0.7);
     width: 88%;
-    height: 650px;
+    height: 750px;
     margin: 50px auto;
     position: relative;
     border: 1px solid #eee;
@@ -105,8 +108,8 @@ input {
     float: left;
 }
 #bottom table {
-   width: auto;
-    border: 0px;
+   width: 100%;
+   border: 0px;
 }
 
 #bottom th, #bottom td {
@@ -127,6 +130,8 @@ input {
     width: 100px !important;
     top: -2px;
     right: 0;
+    border:1px solid #eee;
+    z-index:100;
 }
 #bottom th {
     background-color: #23516f !important;
@@ -136,13 +141,10 @@ input {
     display: inline-block;
 }
 /*#content_GridView2 table{width:1653px;}*/
-#GridView2 table td {
-    width: 50px !important;
+#GridView1 table {
+    width: auto !important;
     /*background-color: #23516f;*/
     margin-right: 5px;
-}
-#GridView2 table td a {
-    color:coral;
 }
 .button {
     width:120px!important;
@@ -155,6 +157,8 @@ input {
 #bottom {
     padding: 20px;
     padding-top: 0px;
+    overflow:scroll;
+    overflow-y:hidden;
 }
 
 .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year option {
