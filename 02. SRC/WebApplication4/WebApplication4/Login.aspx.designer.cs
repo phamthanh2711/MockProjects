@@ -31,13 +31,13 @@ namespace WebApplication4 {
         protected global::System.Web.UI.WebControls.TextBox user;
         
         /// <summary>
-        /// reqName control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqName;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// password control.
@@ -49,13 +49,13 @@ namespace WebApplication4 {
         protected global::System.Web.UI.WebControls.TextBox password;
         
         /// <summary>
-        /// RequiredFieldValidator1 control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// lblCheck control.
