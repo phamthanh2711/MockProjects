@@ -191,14 +191,14 @@ input {
 
 #btn_login {
     padding: 15px 20px;
-    margin: 25px;
+    margin: 50px 0px 30px;
     border: 0px;
     border-radius: 5px;
     font-size: 14pt;
     background-color: #23516f;
     color: #fff;
-    float:none!important;
-    width:200px!important;
+    float: none !important;
+    width: 200px !important;
 }
 
 #btn_login:hover {

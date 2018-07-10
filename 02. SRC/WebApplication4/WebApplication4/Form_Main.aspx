@@ -45,12 +45,12 @@
              <asp:Panel ID="Panel1" runat="server">
                 <div class="row">
                     <label class="label_kh">ID</label>
-                    <asp:TextBox runat="server" ID="txt_ID"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txt_ID" autocomplete="off"></asp:TextBox>
                 </div>
             
                 <div class="row">
                     <label class="label_kh" >Name</label>
-                    <asp:TextBox runat="server" ID="txt_Name"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txt_Name" autocomplete="off"></asp:TextBox>
                 </div>
 
                 <asp:Button ID="btnFind" runat="server" class="button" Text="Find" OnClick="btnFind_Click"/>

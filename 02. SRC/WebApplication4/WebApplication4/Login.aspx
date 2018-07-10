@@ -13,9 +13,9 @@
         <p style="text-align:center; font-size: 28px; font-weight:bold; color:#fff; margin:20px;display:block">FORM LOGIN</p>
         <div id="logo"><img src="Assets/img/logo.png" width="100%"></div>
         <div style="width:100%">
-            <p><asp:Textbox id="user" runat="server" name="user" placeholder="Insert your user name"></asp:TextBox></p>
+            <p><asp:Textbox id="user" runat="server" name="user" placeholder="Insert your user name"  autocomplete="off"></asp:TextBox></p>
             <p><asp:Label id="Label1" runat="server" style="display:block;color: #FF9900; text-align:center"></asp:Label></p>
-            <p><asp:Textbox id="password" runat="server" name="password" placeholder="Insert your password" TextMode="Password"></asp:TextBox></p>
+            <p><asp:Textbox id="password" runat="server" name="password" placeholder="Insert your password" TextMode="Password" autocomplete="off"></asp:TextBox></p>
             <p><asp:Label id="Label2" runat="server" style="display:block;color: #FF9900; text-align:center"></asp:Label></p>
             <p><asp:Label id="lblCheck" runat="server" style="display:block;color: #FF9900; text-align:center"></asp:Label></p>
             

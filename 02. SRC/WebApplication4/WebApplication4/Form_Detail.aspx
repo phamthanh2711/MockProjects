@@ -28,7 +28,7 @@
 <body>
     <form id="form1" runat="server">
         <div style="height: 50px; padding:5px; background-color: #23516f; border-bottom:1px solid #eee;">
-            <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click"/>
+            <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click" CausesValidation="false"/>
             <marquee style="margin: 14px;">Welcome to the form information of customer</marquee>
         </div>
         <div id="wrapper">
@@ -42,7 +42,7 @@
                         </div>
                         <div class="row">
                             <p><label class="label_kh" >Name (*)</label>
-                            <asp:TextBox runat="server" ID="txt_Name"></asp:TextBox></p>
+                            <asp:TextBox runat="server" ID="txt_Name" autocomplete="off"></asp:TextBox></p>
                             <p>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please insert name of customer" ControlToValidate="txt_Name" ForeColor="#FF9900" style="text-align: left; position:absolute; top: 50px;left: 210px;"></asp:RequiredFieldValidator>
                             </p>
@@ -55,7 +55,7 @@
                         <div class="row">
                             <p>
                                 <label class="label_kh">Birth (*)</label>
-                                <asp:TextBox runat="server" ID="txt_Birth"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txt_Birth"  autocomplete="off"></asp:TextBox>
                             </p>
                             <p>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please insert date of birth" ControlToValidate="txt_Birth" ForeColor="#FF9900" style="text-align: left; position:absolute; top: 50px;left: 210px;"></asp:RequiredFieldValidator>
@@ -70,7 +70,7 @@
                         <div class="row">
                             <p>
                                 <label class="label_kh" >Phone</label>
-                                <asp:TextBox runat="server" ID="txt_Phone"></asp:TextBox> 
+                                <asp:TextBox runat="server" ID="txt_Phone" autocomplete="off"></asp:TextBox> 
                             </p> 
                             <p>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Phone number cannot fill text, white space or specical symbol" ControlToValidate="txt_Phone"
@@ -81,7 +81,7 @@
                         <div class="row">
                             <p>
                                 <label class="label_kh" >Email</label>
-                                <asp:TextBox runat="server" ID="txt_Email"></asp:TextBox>
+                                <asp:TextBox runat="server" ID="txt_Email" autocomplete="off"></asp:TextBox>
                             </p>
                             <p>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Error format of email" ControlToValidate="txt_Email"
@@ -91,7 +91,7 @@
                         </div>
                         <div class="row">
                         <label class="label_kh" >Address</label>
-                            <asp:TextBox runat="server" ID="txt_Address" ></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txt_Address"  autocomplete="off"></asp:TextBox>
                         </div> 
                         <div class="row" style="padding-left:200px">
                             <asp:Button ID="btnInsert" runat="server" class="button" Text="Insert" OnClick="btnInsert_Click"/>
