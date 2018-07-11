@@ -8,6 +8,7 @@
     <meta name=Generator content="Microsoft Excel 11"/>
     <link rel="stylesheet" href="Assets/jquery/jquery-ui.css" />
     <link rel="stylesheet" href="Assets/jquery/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="Assets/jquery/jquery-ui.js"></script>
     <script src="Assets/jquery/jquery-ui.min.js"></script>
@@ -32,29 +33,30 @@
 </head>
 <body>
     <form id="form1" runat="server" defaultbutton="btnFind">
-        <div style="height: 50px; padding:5px; background-color: #23516f; border-bottom:1px solid #eee;">
-            <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click"/>
+        <div style="height: 60px; padding:5px; background-color: #23516f; border-bottom:1px solid #eee;">
+            <asp:Button ID="btnOut" runat="server" class="button" Text="Log out" OnClick="btnOut_Click" />
             <marquee style="margin: 14px;">Welcome to the form information of customer</marquee>
         </div>
         <div id="wrapper">
         <p class="titlehd">Form information of customer</p>
-        
             
         <div id="header">
              <asp:Panel ID="Panel1" runat="server">
                 <div class="row">
-                    <label class="label_kh">ID</label>
+                    <label class="label_kh"><i class="far fa-address-card"></i>ID</label>
                     <asp:TextBox runat="server" ID="txt_ID" autocomplete="off"></asp:TextBox>
                 </div>
             
                 <div class="row">
-                    <label class="label_kh" >Name</label>
+                    <label class="label_kh" ><i class="fas fa-user"></i>Name</label>
                     <asp:TextBox runat="server" ID="txt_Name" autocomplete="off"></asp:TextBox>
                 </div>
 
                 <asp:Button ID="btnFind" runat="server" class="button" Text="Find" OnClick="btnFind_Click"/>
-                             
+                 
              </asp:Panel>
+
+
            </div>  
                 
                 <div id="btn">
@@ -130,7 +132,7 @@
                             <HeaderStyle Width="300px" />
                             <ItemStyle Width="300px" HorizontalAlign="Left" />
                             </asp:BoundField>
-                            <asp:CommandField ShowSelectButton="True" SelectText="Edit">
+                            <asp:CommandField ShowSelectButton="True" SelectImageUrl="~/Assets/img/edit.png" ButtonType="Image" ItemStyle-Width="5px">      
                             <ControlStyle Width="66px" />
                             <FooterStyle Width="66px" />
                             <HeaderStyle Width="66px" />

@@ -37,18 +37,17 @@ namespace WebApplication4
         {
             try
             {
-                lblCheck.Text = "";
                 Label1.Text = "";
                 Label2.Text = "";
                 if (user.Text == "")
                 {
-                    Label1.Text = "Please insert user name";
+                    Label1.Text = "Please insert into textbox";
                 }
                 if (password.Text == "")
                 {
-                    Label2.Text = "Please insert password";
+                    Label2.Text = "Please insert into textbox";
                 }
-                if (user.Text!=""&& password.Text!="")
+                if (user.Text!="" && password.Text!="")
                 {
                     String pass = EncodePassword(password.Text);
                     Connect_SQL sql = new Connect_SQL();
@@ -65,14 +64,14 @@ namespace WebApplication4
                     else
                     {
                         Session["login"] = null;
-                        lblCheck.Text = "Incorrect username or password";
+                        Label2.Text = "Incorrect username or password";
                     }
                 }
                 
             }
             catch (NullReferenceException)
             {
-                lblCheck.Text = "Connect to Database fail";
+                Label2.Text = "Connect to Database fail";
             }
         }
     }

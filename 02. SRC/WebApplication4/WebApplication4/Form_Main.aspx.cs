@@ -159,7 +159,7 @@ namespace WebApplication4
                 }
                 else
                 {
-                    Label1.Text = "Please choose textbox to delete";
+                    Label1.Text = "Choose check box to delete";
                     Panel_Mess.Attributes.Add("style", "display: block");
                 }
             }
@@ -173,14 +173,16 @@ namespace WebApplication4
         // button log out the page
         protected void btnOut_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 Session["login"] = null;
                 Response.Redirect("Login.aspx");
-            } catch(HttpException)
+            }
+            catch (HttpException)
             {
                 Label1.Text = "Button log out error";
                 Panel_Mess.Attributes.Add("style", "display: block");
-            }  
+            }
         }
 
         // change index page of gridview
@@ -255,7 +257,7 @@ namespace WebApplication4
             {
                 Response.ClearContent();
                 Response.Buffer = true;
-                Response.AddHeader("content-disposition", string.Format("attachment; filename={0}", ""+DateTime.Today.ToString("yyyyMMdd").Trim()+".xls"));
+                Response.AddHeader("content-disposition", string.Format("attachment; filename={0}", "List_"+DateTime.Today.ToString("yyyyMMdd").Trim()+".xls"));
                 Response.ContentType = "application/ms-excel";
                 Response.ContentEncoding = System.Text.Encoding.Unicode;
                 Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());

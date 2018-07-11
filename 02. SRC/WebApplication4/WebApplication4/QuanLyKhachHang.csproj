@@ -72,9 +72,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bg.jpg" />
     <Content Include="Assets\css\style.css" />
     <Content Include="Assets\img\banner.png" />
+    <Content Include="Assets\img\edit.png" />
     <Content Include="Assets\img\l.png" />
     <Content Include="Assets\img\logo.png" />
     <Content Include="Assets\img\m.png" />
@@ -102,6 +104,8 @@
     <Content Include="Assets\jquery\jquery-ui.theme.css" />
     <Content Include="Assets\jquery\jquery-ui.theme.min.css" />
     <Content Include="Assets\jquery\LICENSE.txt" />
+    <Content Include="Assets\jquery\wow.js" />
+    <Content Include="Assets\jquery\wow.min.js" />
     <Content Include="Form_Detail.aspx" />
     <Content Include="Form_Main.aspx" />
     <Content Include="Login.aspx" />

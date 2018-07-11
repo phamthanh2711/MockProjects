@@ -14,7 +14,6 @@ namespace WebApplication4
 {
     public partial class Form_Detail : System.Web.UI.Page
     {
-
         public String id = "";
         public String name = "", birth = "", gender = "", email = "", phone = "", address = "";
 
