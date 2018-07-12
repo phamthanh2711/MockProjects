@@ -67,8 +67,13 @@ namespace WebApplication4
                 { 
                     int stt = 0;
                     stt = customer.Get_Count_Row();
-                    String ma = Constant.head_ID + (stt+1).ToString("000000");
-                    Session["id"] = ma;
+                    if (stt < 100000)
+                    {
+                        Session["full_data"] = null;
+                        String ma = Constant.head_ID + (stt + 1).ToString("00000");
+                        Session["id"] = ma;
+                    }
+                    else Session["full_data"] = 1;
                 }
             }
             catch (Exception ex)
@@ -119,11 +124,15 @@ namespace WebApplication4
             {
                 Session["status"] = "insert";
                 Get_ID();
-                if (Session["id"] != null)
+                if (Session["id"] != null && Session["full_data"]!=null)
                 {
                     Response.Redirect("Form_Detail.aspx");
                 }
-                    
+                else
+                {
+                    Label1.Text = "Cannot add anymore";
+                    Panel_Mess.Attributes.Add("style", "display: block");
+                }
             }
             catch(SqlException)
             {
