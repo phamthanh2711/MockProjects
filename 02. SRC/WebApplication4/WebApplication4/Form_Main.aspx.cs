@@ -124,7 +124,7 @@ namespace WebApplication4
             {
                 Session["status"] = "insert";
                 Get_ID();
-                if (Session["id"] != null && Session["full_data"]!=null)
+                if (Session["id"] != null && Session["full_data"]==null)
                 {
                     Response.Redirect("Form_Detail.aspx");
                 }
