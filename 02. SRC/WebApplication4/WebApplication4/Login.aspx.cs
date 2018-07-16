@@ -67,9 +67,9 @@ namespace WebApplication4
                         Label2.Text = "Incorrect username or password";
                     }
                 }
-                
+          
             }
-            catch (NullReferenceException)
+            catch (SqlException)
             {
                 Label2.Text = "Connect to Database fail";
             }

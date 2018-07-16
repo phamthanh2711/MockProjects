@@ -73,9 +73,9 @@
                                 <asp:TextBox runat="server" ID="txt_Phone" autocomplete="off"></asp:TextBox> 
                             </p> 
                             <p>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Phone number cannot fill text, white space or specical symbol" ControlToValidate="txt_Phone"
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Phone number cannot fill text" ControlToValidate="txt_Phone"
                                 Display="Dynamic" ForeColor="#FF9900" SetFocusOnError="True"
-                                ValidationExpression="^[\d\+\(\)\.\,]+$" style="text-align: left; position:absolute; top: 50px;left: 240px;"></asp:RegularExpressionValidator>
+                                ValidationExpression="^[\-\s\d\+\(\)\.\,]+$" style="text-align: left; position:absolute; top: 50px;left: 240px;"></asp:RegularExpressionValidator>
                             </p>
                         </div>
                         <div class="row">
