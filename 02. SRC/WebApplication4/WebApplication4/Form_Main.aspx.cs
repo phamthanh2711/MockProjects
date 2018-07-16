@@ -67,7 +67,7 @@ namespace WebApplication4
                 { 
                     int stt = 0;
                     stt = customer.Get_Count_Row();
-                    if (stt < 100000)
+                    if (stt < 99999)
                     {
                         Session["full_data"] = null;
                         String ma = Constant.head_ID + (stt + 1).ToString("00000");

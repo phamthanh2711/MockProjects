@@ -217,6 +217,7 @@ input {
     padding-top: 0px;
     overflow:scroll;
     overflow-y:hidden;
+    border:0.1px solid #eee;
 }
 
 .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year option {
