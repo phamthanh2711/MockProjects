@@ -79,7 +79,7 @@
 
                 <div style="padding:15px;">
                 <label style="float: right; padding: 10px;">Count Row</label>
-                <asp:DropDownList ID="DropDownList1" AutoPostBack="true" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged1" >
+                <asp:DropDownList ID="DropDownList1" AutoPostBack="true" runat="server" OnSelectedIndexChanged="PageSize_Changed" >
                     <asp:ListItem Text="20"></asp:ListItem>
                     <asp:ListItem Text="40"></asp:ListItem>
                     <asp:ListItem Text="60"></asp:ListItem>
@@ -89,7 +89,7 @@
                 <div id="bottom">
                     
                     
-                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AllowPaging="True" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" PageSize="20" OnRowCreated="GridView1_RowCreated">
+                    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" PageSize="20">
                         <Columns>
                             <asp:BoundField HeaderText="ID" DataField="id">
                             <ControlStyle Width="100px" />
@@ -149,12 +149,17 @@
                                 
                             </asp:TemplateField>
                         </Columns>
-                        <PagerSettings Mode="NumericFirstLast" FirstPageText="First" LastPageText="End" NextPageText="Next" PageButtonCount="3" PreviousPageText="Previous" />
                         <PagerStyle BorderWidth="0px" HorizontalAlign="Center" />
                         <SelectedRowStyle BackColor="#6699FF" />
                     </asp:GridView>
                     
-                    
+                    <div style="padding:20px">
+                        <asp:Repeater ID="rptPager" runat="server">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="lnkPage" runat="server" Text = '<%#Eval("Text") %>' CommandArgument = '<%# Eval("Value") %>' Enabled = '<%# Eval("Enabled") %>' OnClick = "Page_Changed" style="padding:5px"></asp:LinkButton>
+                        </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
                 </div>
         </div>
     </form>

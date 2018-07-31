@@ -301,3 +301,7 @@ input {
 #btnReturn {
     margin: 10px 80px;
 }
+.aspNetDisabled {
+    color: #eee;
+    border: 1px solid #eee;
+}

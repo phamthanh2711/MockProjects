@@ -57,6 +57,33 @@ namespace WebApplication4
             }
         }
 
+        public DataTable Get_Data(SqlCommand com)
+        {
+            try
+            {
+                Connect_Open();
+                com.Connection = conn;
+                com.CommandType = CommandType.StoredProcedure;
+                //com.CommandText = query;
+                //com.Parameters.Clear();
+                //if (param != null)
+                //{
+                //    for (int i = 0; i < param.Count; i++)
+                //    {
+                //        com.Parameters.AddWithValue(param[i].Item1, param[i].Item2);
+                //    }
+                //}
+                da = new SqlDataAdapter();
+                da.SelectCommand = com;
+                da.Fill(dt);
+                Connect_Close();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public DataTable Get_Data(String query, List<Tuple<string, string>> param)
         {
             try

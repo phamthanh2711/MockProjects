@@ -16,6 +16,9 @@ namespace WebApplication4
     public partial class Form_Main : System.Web.UI.Page
     {
         Customer customer = new Customer();
+        private DataTable dt = new DataTable();
+        private Connect_SQL sql = new Connect_SQL();
+        private SqlCommand com = new SqlCommand();
 
         // Clear all of textbox on form
         public void Clear_TextBox()
@@ -25,27 +28,115 @@ namespace WebApplication4
             GridView1.SelectedRowStyle.BackColor = Color.Transparent;
         }
 
-        public void Load_Data()
+        public void Find_Customer(int pageIndex)
         {
             try
             {
-                if (Session["index"] != null && Session["status"]!=null && Session["status"].ToString() == "update")
-                {
-                    GridView1.PageIndex = Int32.Parse(Session["index"].ToString());
-                }
-                if (Session["count_row"] != null)
-                {
-                    DropDownList1.SelectedValue = Session["count_row"].ToString();
-                    GridView1.PageSize = Int32.Parse(Session["count_row"].ToString());
-                }
-                GridView1.DataSource = customer.Find_Customer(txt_ID.Text, txt_Name.Text);
+                com.Parameters.Clear();
+                com.Parameters.AddWithValue("@id", txt_ID.Text);
+                com.Parameters.AddWithValue("@name", txt_Name.Text);
+                com.Parameters.AddWithValue("@PageSize", DropDownList1.SelectedValue);
+                com.Parameters.AddWithValue("@PageNum", pageIndex);
+                com.Parameters.Add("@RecordCount", SqlDbType.Int, 4);
+                com.Parameters["@RecordCount"].Direction = ParameterDirection.Output;
+                com.CommandText = "Find_Customer";
+                dt= sql.Get_Data(com);
+                int recordCount = Convert.ToInt32(com.Parameters["@RecordCount"].Value);
+                this.PopulatePager(recordCount, pageIndex);
+                GridView1.DataSource= dt;
                 GridView1.DataBind();
             }
-            catch(SqlException)
+            catch (Exception ex)
             {
-                Label1.Text = "Connect to Database fail";
-                Panel_Mess.Attributes.Add("style", "display: block");
-            }          
+                throw ex;
+            }
+        }
+
+        protected void Page_Changed(object sender, EventArgs e)
+        {
+            int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
+            this.Find_Customer(pageIndex);
+            Session["index"] = pageIndex;
+        }
+
+        private void PopulatePager(int recordCount, int currentPage)
+        {
+            List<ListItem> pages = new List<ListItem>();
+            int startIndex, endIndex;
+            int pagerSpan = 3;
+
+            //Calculate the Start and End Index of pages to be displayed.
+            double dblPageCount = (double)((decimal)recordCount / Convert.ToDecimal(DropDownList1.SelectedValue));
+            int pageCount = (int)Math.Ceiling(dblPageCount);
+            startIndex = currentPage > 1 && currentPage + pagerSpan - 1 < pagerSpan ? currentPage : 1;
+            endIndex = pageCount > pagerSpan ? pagerSpan : pageCount;
+            if (currentPage > pagerSpan % 2)
+            {
+                if (currentPage == 2)
+                {
+                    endIndex = 3;
+                }
+                else
+                {
+                    endIndex = currentPage + 1;
+                }
+            }
+            else
+            {
+                endIndex = (pagerSpan - currentPage) + 1;
+            }
+
+            if (endIndex - (pagerSpan - 1) > startIndex)
+            {
+                startIndex = endIndex - (pagerSpan - 1);
+            }
+
+            if (endIndex > pageCount)
+            {
+                endIndex = pageCount;
+                startIndex = ((endIndex - pagerSpan) + 1) > 0 ? (endIndex - pagerSpan) + 1 : 1;
+            }
+
+            //Add the First Page Button.
+            if (currentPage > 1)
+            {
+                pages.Add(new ListItem("First", "1"));
+            }
+
+            //Add the Previous Button.
+            if (currentPage > 2)
+            {
+                pages.Add(new ListItem("<<", (currentPage - 2).ToString()));
+            }
+
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                pages.Add(new ListItem(i.ToString(), i.ToString(), i != currentPage));
+            }
+
+            //Add the Next Button.
+            if (currentPage < pageCount-1)
+            {
+                pages.Add(new ListItem(">>", (currentPage + 2).ToString()));
+            }
+
+            //Add the Last Button.
+            if (currentPage != pageCount)
+            {
+                pages.Add(new ListItem("Last", pageCount.ToString()));
+            }
+
+            ///////////////////////////////////////////////////////////////
+            
+
+           
+            rptPager.DataSource = pages;
+            rptPager.DataBind();
+        }
+
+        protected void PageSize_Changed(object sender, EventArgs e)
+        {
+            this.Find_Customer(1);
         }
 
         //load page 
@@ -54,7 +145,14 @@ namespace WebApplication4
             if (Session["login"] == null) Response.Redirect("Login.aspx");
             if (!IsPostBack)
             {
-                Load_Data();
+                if (Session["index"] != null && Session["status"] != null && Session["status"].ToString() == "update")
+                {
+                    Find_Customer((int)(Session["index"]));
+                }
+                else
+                {
+                    Find_Customer(1);
+                }
             }
         }
 
@@ -86,9 +184,8 @@ namespace WebApplication4
         protected void btnFind_Click(object sender, EventArgs e)
         {
             try
-            { 
-                GridView1.DataSource = customer.Find_Customer(txt_ID.Text.Trim(), txt_Name.Text.Trim());
-                GridView1.DataBind();
+            {
+                Find_Customer(1);
             }
             catch (Exception)
             {
@@ -106,17 +203,11 @@ namespace WebApplication4
         protected void btnReset_Click(object sender, EventArgs e)
         {
             Clear_TextBox();
-            Load_Data();
+            Find_Customer(1);
         }
 
-        //Open dropdownlist to select count row will display in gridview
-        protected void DropDownList1_SelectedIndexChanged1(object sender, EventArgs e)
-        {
-            GridView1.PageSize = Int32.Parse(DropDownList1.SelectedItem.ToString());
-            Session["count_row"] = GridView1.PageSize;
-            Load_Data();
-        }
-
+      
+       
         //Open the detail page to insert a customer into table
         protected void btnOpenInsert_Click(object sender, EventArgs e)
         {
@@ -194,21 +285,6 @@ namespace WebApplication4
             }
         }
 
-        // change index page of gridview
-        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            try {
-                GridView1.PageIndex = e.NewPageIndex;
-                Session["index"] = GridView1.PageIndex;
-                Load_Data();
-            } catch(ArgumentOutOfRangeException)
-            {
-                Label1.Text = "property is set to a value less than 0";
-                Panel_Mess.Attributes.Add("style", "display: block");
-            }   
-        }
-
-
         //event when click the cell in gridview
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -228,35 +304,7 @@ namespace WebApplication4
         protected void btnReturn_Click(object sender, EventArgs e)
         {
             Panel_Mess.Attributes.Add("style", "display: hidden");
-            Load_Data();         
-        }
-
-
-        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Pager)
-            {
-                int i = 0;
-                foreach (Control ctl in e.Row.Cells[0].Controls[0].Controls[0].Controls)
-                {
-                    i++;
-                    if (ctl.Controls[0].GetType().ToString() == "System.Web.UI.WebControls.DataControlPagerLinkButton")
-                    {
-                        LinkButton lnk = (LinkButton)ctl.Controls[0];
-                        if (lnk.Text == "...")
-                        {
-                            if (i < 3)
-                            {
-                                lnk.Text = "<<";
-                            }
-                            else
-                            {
-                                lnk.Text = ">>";
-                            }
-                        }
-                    }
-                }
-            }
+            Find_Customer(1);
         }
 
         //Export data of table to file excel
@@ -279,7 +327,7 @@ namespace WebApplication4
                 GridView1.Columns[7].Visible = false;
                 GridView1.Columns[8].Visible = false;
                 GridView1.AllowPaging = false;
-                GridView1.DataSource= customer.Find_Customer(txt_ID.Text, txt_Name.Text);
+                GridView1.DataSource= customer.Select_Customer("");
                 GridView1.DataBind();
 
                 GridView1.RenderControl(textWriter);

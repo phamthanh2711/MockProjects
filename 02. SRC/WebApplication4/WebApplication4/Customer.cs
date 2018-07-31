@@ -134,23 +134,5 @@ namespace WebApplication4
                 throw ex;
             }       
         }
-
-        public DataTable Find_Customer(string id, String name)
-        {
-            try
-            {
-                var param = new List<Tuple<string, string>>();
-                param.Add(Tuple.Create("@id", id));
-                param.Add(Tuple.Create("@name", name));
-                String query = "Find_Customer";
-
-                dt = sql.Get_Data(query,param);
-                return dt;
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }
-        }
     }
 }
