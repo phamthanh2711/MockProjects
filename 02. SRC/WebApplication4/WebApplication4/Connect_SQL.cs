@@ -64,15 +64,6 @@ namespace WebApplication4
                 Connect_Open();
                 com.Connection = conn;
                 com.CommandType = CommandType.StoredProcedure;
-                //com.CommandText = query;
-                //com.Parameters.Clear();
-                //if (param != null)
-                //{
-                //    for (int i = 0; i < param.Count; i++)
-                //    {
-                //        com.Parameters.AddWithValue(param[i].Item1, param[i].Item2);
-                //    }
-                //}
                 da = new SqlDataAdapter();
                 da.SelectCommand = com;
                 da.Fill(dt);

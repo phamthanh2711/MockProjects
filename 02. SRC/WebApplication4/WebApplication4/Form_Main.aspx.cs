@@ -98,7 +98,7 @@ namespace WebApplication4
             }
 
             //Add the First Page Button.
-            if (currentPage > 1)
+            if (currentPage > 2)
             {
                 pages.Add(new ListItem("First", "1"));
             }
@@ -106,7 +106,10 @@ namespace WebApplication4
             //Add the Previous Button.
             if (currentPage > 2)
             {
-                pages.Add(new ListItem("<<", (currentPage - 2).ToString()));
+                if(currentPage!=pageCount)
+                    pages.Add(new ListItem("<<", (currentPage - 2).ToString()));
+                else
+                    pages.Add(new ListItem("<<", (currentPage - 3).ToString()));
             }
 
             for (int i = startIndex; i <= endIndex; i++)
@@ -117,18 +120,17 @@ namespace WebApplication4
             //Add the Next Button.
             if (currentPage < pageCount-1)
             {
-                pages.Add(new ListItem(">>", (currentPage + 2).ToString()));
+                if(currentPage!=1)
+                    pages.Add(new ListItem(">>", (currentPage + 2).ToString()));
+                else
+                    pages.Add(new ListItem(">>", (currentPage + 3).ToString()));
             }
 
             //Add the Last Button.
-            if (currentPage != pageCount)
+            if (currentPage != pageCount-1)
             {
                 pages.Add(new ListItem("Last", pageCount.ToString()));
             }
-
-            ///////////////////////////////////////////////////////////////
-            
-
            
             rptPager.DataSource = pages;
             rptPager.DataBind();
